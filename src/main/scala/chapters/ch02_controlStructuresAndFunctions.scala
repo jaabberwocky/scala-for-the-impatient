@@ -28,6 +28,15 @@ object ch02_controlStructuresAndFunctions extends App {
     println(i)
   }
 
+  // throw exceptions
+  def getSquareRoot(x: Int) = {
+    if (x >= 0) {
+      scala.math.pow(x, 0.5)
+    } else throw new IllegalArgumentException("x cannot be negative")
+  }
+
+  println(getSquareRoot(0))
+
 
 
 }
