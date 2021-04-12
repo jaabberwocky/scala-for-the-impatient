@@ -28,5 +28,24 @@ object ch03 extends App {
     println(el)
   }
 
+  // transforming arrays
+  val arr = Array(2,3,5,7,11)
+  val result = for (elem <- arr) yield 2 * elem
+  println(result.mkString(","))
+
+  // remove all negative numbers? use for-yield combo also
+  val arr2 = ArrayBuffer.range(1,11)
+  val result2 = for (elem <- arr2 if elem % 2 == 0) yield elem
+  println(result2.mkString(","))
+
+  // common algorithms
+  println(arr2.max)
+  println(arr2.min)
+  println(arr2.sum)
+
+  // multi-dimensional arrays
+  val matrix= Array.ofDim[Double](3,4) // 3R x 4C
+
+
 
 }
