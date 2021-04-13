@@ -3,7 +3,7 @@ package main.scala.exercises
 import java.util.Calendar._
 import java.util.Scanner
 import scala.collection.JavaConverters._
-import scala.collection.mutable
+import scala.collection.mutable.{Map => MutableMap}
 
 object ch04_mapsAndTuples extends App {
 
@@ -20,7 +20,7 @@ object ch04_mapsAndTuples extends App {
   //Or look at Chapter 9 for a Scalaesque way.
   //At the end, print out all words and their counts.
 
-  def getWordCounts(file: String): mutable.Map[String, Int] = {
+  def getWordCounts(file: String): MutableMap[String, Int] = {
     val wordCounts = scala.collection.mutable.Map[String, Int]()
 
     val in = new java.util.Scanner(new java.io.File(file))
@@ -75,7 +75,7 @@ object ch04_mapsAndTuples extends App {
   //Q4 Repeat the preceding exercise with a sorted map, so that the words are
   //printed in sorted order.
 
-  def getWordCountsSortedMap(file: String): mutable.Map[String, Int] = {
+  def getWordCountsSortedMap(file: String): MutableMap[String, Int] = {
     val wordCounts = scala.collection.mutable.SortedMap[String, Int]()
 
     val in: Scanner = new java.util.Scanner(new java.io.File(file))
@@ -101,7 +101,7 @@ object ch04_mapsAndTuples extends App {
 
   //Q5 Repeat the preceding exercise with a java.util.TreeMap that you adapt to the
   //Scala API.
-  def getWordCountsJavaMap(file: String): mutable.Map[String, Int] = {
+  def getWordCountsJavaMap(file: String): MutableMap[String, Int] = {
     val wordCounts: scala.collection.mutable.Map[String, Int] = new java.util.TreeMap[String, Int].asScala
 
     val in: Scanner = new java.util.Scanner(new java.io.File(file))
@@ -130,7 +130,7 @@ object ch04_mapsAndTuples extends App {
   //similarly for the other weekdays. Demonstrate that the elements are visited
   //in insertion order.
 
-  def generateWeekdayLinkedHashMap(): mutable.Map[String, Int] = {
+  def generateWeekdayLinkedHashMap(): MutableMap[String, Int] = {
     val weekdayMap = scala.collection.mutable.LinkedHashMap[String, Int]()
 
     weekdayMap("Monday") = MONDAY
@@ -153,7 +153,7 @@ object ch04_mapsAndTuples extends App {
     var maxKey = ""
 
     // find longest key
-    for ((k, v) <- prop) {
+    for ((k, _) <- prop) {
       if (k.length > maxKey.length) maxKey = k
     }
 
