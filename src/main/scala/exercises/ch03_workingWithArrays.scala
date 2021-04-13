@@ -1,6 +1,8 @@
 package main.scala.exercises
 
 import scala.collection.mutable.ArrayBuffer
+import java.util.TimeZone.getAvailableIDs
+import java.awt.datatransfer._
 
 object ch03_workingWithArrays extends App {
 
@@ -94,7 +96,9 @@ object ch03_workingWithArrays extends App {
   // Q8 Refactor code to be more efficient
 
   def removeAllButFirstNegative(arr: ArrayBuffer[Int]): Unit = {
-    val posRemove = for (i <- 0 until arr.length if arr(i) < 0) yield i
+    val posRemove = {
+      for (i <- arr.indices if arr(i) < 0) yield i
+    }
     posRemove.drop(1)
 
     for (i <- posRemove.drop(1).reverse) {
@@ -105,5 +109,25 @@ object ch03_workingWithArrays extends App {
   val arr5 = ArrayBuffer[Int](-1,-1,0,3,-4,5,6)
   removeAllButFirstNegative(arr5)
   println(arr5.mkString(","))
+
+  // Q10
+
+  def getAmericaIDs = {
+    val allIDs = getAvailableIDs
+    val americaIDs = for (elem <- allIDs if elem startsWith("America/")) yield elem.replace("America/", "")
+    val sortedArr = americaIDs.sorted
+    sortedArr
+  }
+
+  println(getAmericaIDs.mkString(","))
+
+  // Q11 Import java.awt.datatransfer._ and make an object of type SystemFlavorMap with
+  // the call
+  val flavors = SystemFlavorMap.getDefaultFlavorMap.asInstanceOf[SystemFlavorMap]
+  var javaList = flavors.getNativesForFlavor(DataFlavor.imageFlavor)
+  val convertedBuf = javaList.toArray.toBuffer
+  println(convertedBuf.mkString(","))
+
+
 }
 
