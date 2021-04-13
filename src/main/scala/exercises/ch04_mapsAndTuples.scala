@@ -1,17 +1,17 @@
 package main.scala.exercises
 
+import java.util.Calendar._
 import java.util.Scanner
 import scala.collection.JavaConverters._
 import scala.collection.mutable
-import java.util.Calendar._
 
 object ch04_mapsAndTuples extends App {
 
-    // Q1 Set up a map of prices for a number of gizmos that you covet. Then produce
-    // a second map with the same keys and the prices at a 10 percent discount.
-    val gizmos = Map("iPhone" -> 1299, "S21" -> 800, "Pixel" -> 999)
-    val gizmosDiscounted = for ((k,v) <- gizmos) yield (k, v * 0.90)
-    println(gizmosDiscounted)
+  // Q1 Set up a map of prices for a number of gizmos that you covet. Then produce
+  // a second map with the same keys and the prices at a 10 percent discount.
+  val gizmos = Map("iPhone" -> 1299, "S21" -> 800, "Pixel" -> 999)
+  val gizmosDiscounted = for ((k, v) <- gizmos) yield (k, v * 0.90)
+  println(gizmosDiscounted)
 
   //Q2 Write a program that reads words from a file. Use a mutable map to count
   //how often each word appears. To read the words, simply use a java.util.Scanner:
@@ -37,7 +37,7 @@ object ch04_mapsAndTuples extends App {
         else wordCounts(word) = 1
       }
     }
-  wordCounts
+    wordCounts
   }
 
   val wc = getWordCounts("resources/myfile.txt")
@@ -45,10 +45,10 @@ object ch04_mapsAndTuples extends App {
 
   //Q3 Repeat the preceding exercise with an immutable map.
 
-  def getWordCountsImmutable(file: String): Map[String, Int] = {
+  def getWordCountsImmutable(filepath: String): Map[String, Int] = {
     var wordCounts = Map[String, Int]()
 
-    val in: Scanner = new java.util.Scanner(new java.io.File(file))
+    val in: Scanner = new java.util.Scanner(new java.io.File(filepath))
     while (in.hasNext()) {
       val words: Array[String] = in.nextLine().split(" ")
       for (elem <- words) {
@@ -66,6 +66,7 @@ object ch04_mapsAndTuples extends App {
     }
     wordCounts
   }
+
   val wc2 = getWordCountsImmutable("resources/myfile.txt")
   println(wc2)
 
@@ -100,7 +101,7 @@ object ch04_mapsAndTuples extends App {
 
   //Q5 Repeat the preceding exercise with a java.util.TreeMap that you adapt to the
   //Scala API.
-  def getWordCountsJavaMap(file: String) = {
+  def getWordCountsJavaMap(file: String): mutable.Map[String, Int] = {
     val wordCounts: scala.collection.mutable.Map[String, Int] = new java.util.TreeMap[String, Int].asScala
 
     val in: Scanner = new java.util.Scanner(new java.io.File(file))
@@ -152,12 +153,12 @@ object ch04_mapsAndTuples extends App {
     var maxKey = ""
 
     // find longest key
-    for ((k,v) <- prop) {
+    for ((k, v) <- prop) {
       if (k.length > maxKey.length) maxKey = k
     }
 
     // using string interpolation to right pad
-    for ((k,v) <- prop) {
+    for ((k, v) <- prop) {
       println(s"%-${maxKey.length + 1}s| %s" format(k, v take 40))
     }
 
@@ -172,13 +173,13 @@ object ch04_mapsAndTuples extends App {
     (values.min, values.max)
   }
 
-  val arr1 = Array(1,2,3,4)
+  val arr1 = Array(1, 2, 3, 4)
   println(minmax(arr1))
 
   //Q9 Write a function lteqgt(values: Array[Int], v: Int) that returns a triple containing
   //the counts of values less than v, equal to v, and greater than v.
 
-  def lteggt(values: Array[Int], v: Int): (Int, Int, Int) ={
+  def lteggt(values: Array[Int], v: Int): (Int, Int, Int) = {
     val lte = values.filter(_ < v)
     val eq = values.filter(_ == v)
     val gte = values.filter(_ > v)
@@ -186,7 +187,7 @@ object ch04_mapsAndTuples extends App {
     (lte.length, eq.length, gte.length)
   }
 
-  val arr2 = Array(1,1,2,2,3,3,4,4)
+  val arr2 = Array(1, 1, 2, 2, 3, 3, 4, 4)
   println(lteggt(arr2, 3)) // (4,2,2)
 
   println("Hello".zip("World"))
