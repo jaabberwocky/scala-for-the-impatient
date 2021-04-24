@@ -5,6 +5,7 @@ import java.util.Scanner
 import scala.collection.JavaConverters._
 import scala.collection.mutable.{Map => MutableMap}
 
+//noinspection DuplicatedCode
 object ch04_mapsAndTuples extends App {
 
   // Q1 Set up a map of prices for a number of gizmos that you covet. Then produce
@@ -78,6 +79,7 @@ object ch04_mapsAndTuples extends App {
   def getWordCountsSortedMap(file: String): MutableMap[String, Int] = {
     val wordCounts = scala.collection.mutable.SortedMap[String, Int]()
 
+    //noinspection DuplicatedCode
     val in: Scanner = new java.util.Scanner(new java.io.File(file))
     while (in.hasNext()) {
       val words: Array[String] = in.nextLine().split(" ")
@@ -191,4 +193,5 @@ object ch04_mapsAndTuples extends App {
   println(lteggt(arr2, 3)) // (4,2,2)
 
   println("Hello".zip("World"))
+
 }
